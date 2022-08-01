@@ -1,3 +1,6 @@
+import random
+import sys
+
 def Sigma(input: int) -> int:
     result = 0
     for i in range(1, input+1):
@@ -78,3 +81,36 @@ def generateCoinChange(input: int) -> None:
 
 # generateCoinChange(97) prints {'Quarter': 3, 'Dime': 2, 'Nickel': 0, 'Penny': 2}
 # generateCoinChange(50) prints {'Quarter': 2, 'Dime': 0, 'Nickel': 0, 'Penny': 0}
+
+# ********************* #
+
+def statisticToDouble() -> dict:
+    result = {
+        "rolls": 0,
+        "min": sys.maxsize,
+        "max": -sys.maxsize,
+        "average": 0
+    }
+    rolls = {
+        "roll1": 0,
+        "roll2": 0
+    }
+    end = false
+
+    while(end == false):
+        rolls.update({"roll1": random.randint(1,6) })
+        rolls.update({"roll1": random.randint(1,6) })
+        if(rolls.get("roll1") == rolls.get("roll2")):
+            if(result.get("rolls") == 0):
+                result.update({"average": (rolls.get("roll1") + rolls.get("roll2")) / 2})
+                result.update({"min" : rolls.get("roll1") + rolls.get("roll2")})
+                result.update({"max" : rolls.get("roll1") + rolls.get("roll2")})
+                result.update({"rolls" : 1})
+            else:
+                pass
+
+
+
+# Implement a 'die' that randomly returns an integer between 1 and 6 inclusive.
+# Roll a pair of these dice, tracking the statistics until doubles are rolled.
+# Display the number of rolls, min, max and average.
