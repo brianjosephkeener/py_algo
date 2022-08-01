@@ -84,7 +84,7 @@ def generateCoinChange(input: int) -> None:
 
 # ********************* #
 
-def statisticToDouble() -> dict:
+def statisticToDouble():
     result = {
         "rolls": 0,
         "min": sys.maxsize,
@@ -95,22 +95,38 @@ def statisticToDouble() -> dict:
         "roll1": 0,
         "roll2": 0
     }
-    end = false
 
-    while(end == false):
+    while(True):
         rolls.update({"roll1": random.randint(1,6) })
-        rolls.update({"roll1": random.randint(1,6) })
+        rolls.update({"roll2": random.randint(1,6) })
         if(rolls.get("roll1") == rolls.get("roll2")):
             if(result.get("rolls") == 0):
-                result.update({"average": (rolls.get("roll1") + rolls.get("roll2")) / 2})
+                result.update({"average": (rolls.get("roll1") + rolls.get("roll2"))})
                 result.update({"min" : rolls.get("roll1") + rolls.get("roll2")})
                 result.update({"max" : rolls.get("roll1") + rolls.get("roll2")})
                 result.update({"rolls" : 1})
+                break
             else:
-                pass
+                result.update({"average" : ((  
+                    rolls.get("roll1") +
+                    rolls.get("roll2") +
+                    result.get("average")
+                ) / rolls.get("rolls")
+                )})
+                if(result.get("min") > rolls.get("roll1") + rolls.get("roll2")):
+                    result.update({"min" : (rolls.get("roll1") + rolls.get("roll2"))})
+                if(result.get("max") < rolls.get("roll1") + rolls.get("roll2")):
+                    result.update({"max" : (rolls.get("roll1") + rolls.get("roll2"))})
+                result.update({"rolls" : result.get("rolls") + 1})
+        else:
+            result.update({"rolls" : result.get(rolls) + 1})
+            result.update({"average" : result.get("average") + rolls.get("roll1") + rolls.get("roll2")})
 
-
+    return result
 
 # Implement a 'die' that randomly returns an integer between 1 and 6 inclusive.
 # Roll a pair of these dice, tracking the statistics until doubles are rolled.
 # Display the number of rolls, min, max and average.
+
+# print(statisticToDouble())
+
