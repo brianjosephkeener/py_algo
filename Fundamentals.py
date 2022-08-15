@@ -107,20 +107,20 @@ def statisticToDouble():
                 result.update({"rolls" : 1})
                 break
             else:
-                result.update({"average" : ((  
-                    rolls.get("roll1") +
-                    rolls.get("roll2") +
-                    result.get("average")
-                ) / rolls.get("rolls")
-                )})
+                result.update({"average" : ((rolls.get("roll1") + rolls.get("roll2") + result.get("average")) / result.get("rolls"))})
                 if(result.get("min") > rolls.get("roll1") + rolls.get("roll2")):
                     result.update({"min" : (rolls.get("roll1") + rolls.get("roll2"))})
                 if(result.get("max") < rolls.get("roll1") + rolls.get("roll2")):
                     result.update({"max" : (rolls.get("roll1") + rolls.get("roll2"))})
-                result.update({"rolls" : result.get("rolls") + 1})
+                result.update({"rolls" : (result.get("rolls") + 1)})
+                break
         else:
-            result.update({"rolls" : result.get(rolls) + 1})
+            result.update({"rolls" : (result.get("rolls") + 1)})
             result.update({"average" : result.get("average") + rolls.get("roll1") + rolls.get("roll2")})
+            if(result.get("min") > rolls.get("roll1") + rolls.get("roll2")):
+                result.update({"min" : (rolls.get("roll1") + rolls.get("roll2"))})
+            if(result.get("max") < rolls.get("roll1") + rolls.get("roll2")):
+                result.update({"max" : (rolls.get("roll1") + rolls.get("roll2"))})
 
     return result
 
@@ -128,5 +128,43 @@ def statisticToDouble():
 # Roll a pair of these dice, tracking the statistics until doubles are rolled.
 # Display the number of rolls, min, max and average.
 
-# print(statisticToDouble())
+# print(statisticToDouble()) | this return should be psuedo-random
+
+# ********************* #
+
+def Fibonacci(input:int) -> int:
+    num1 = 0
+    num2 = 1
+    series = 0
+    for i in range(input):
+        print(series)
+        num1 = num2
+        num2 = series
+        series = num1 + num2
+
+# Implement the Fibonacci function, a famous mathematical equation that generates a numerical
+# sequence such that each number is the sum of the previous two. 
+# The Fibonacci numbers at index 0
+# and 1, coincidentally, have values of 0 and 1. Your function should accept an argument of which
+# Fibonacci number.
+# Examples: fibonacci(2)​ = 1, fibonacci(3)​ = 2, fibonacci(4)​ = 3, fibonacci(5)​ = 5, etc.
+
+# Fibonacci(5) - returns 0, 1, 1, 2, 3
+
+# ********************* #
+
+def DigitAB(num1:int, num2:int) -> int:
+    original = num1
+    for i in range(1, num2):
+        print(num1)
+        num1 = num1 * original
+    return num1
+
+print(DigitAB(12, 5))
+
+# Implement a function that accepts two non-negative integers as arguments. Function lastDigitAtoB(a,
+# b)​ should return the last digit of the first number (a) raised to an exponent of the second number (b).
+
+# ********************* #
+
 
